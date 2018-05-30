@@ -18,9 +18,6 @@ import org.jsoup.select.Elements;
 
 import DBConnn.DbConn;
 
-
-
-
 public class HTMLupload extends Thread{
 	Connection con;
     PreparedStatement ps;
@@ -91,7 +88,6 @@ public class HTMLupload extends Thread{
 		        if(rs.next())
 		        {
 		            newack=rs.getString(1);
-		            
 		        } else {
 		        	newack=rs.getString(1);
 		        }
@@ -100,47 +96,47 @@ public class HTMLupload extends Thread{
 		        rs.close();
 		        }
 		        System.out.println("File Name: "+input.getName());
-		        
-		        if (tds.get(4).text().equals("Record inserted succesfully")) {
-					
-		        	PreparedStatement ppsd=con.prepareStatement("delete from panfilevalidation where SUBSTRING(fieldvalue,10,15)='060219701367103' or fieldvalue='060219701367103' and respdesc!='Record inserted succesfully'");
+		        try {
 		        	
-				} else {
-
-				}
-		        
-		        
-		        if(tds.get(2).text().length()>300)
-		        {
-		        	if (tds.get(4).text().equals("File header details already present in table - duplicate entry of file")) {
-		        		 ps=con.prepareStatement("insert into panfilevalidation values('"+tds.get(0).text()+"','"+tds.get(1).text()+"','"+tds.get(1).text()+"','"+tds.get(3).text()+"','"+tds.get(4).text().replace("'", "")+"','"+filename+"','"+uploaddate+"','"+txtname+"','"+htmldate+"','0','"+htmldate+"','"+val[0]+"')");
-		        		 ps.execute();
-		        		 ps.close();
-		        		 System.out.println("New Error");
-					} else {
-						 ps=con.prepareStatement("insert into panfilevalidation values('"+tds.get(0).text()+"','"+tds.get(1).text()+"','"+tds.get(1).text()+"','"+tds.get(3).text()+"','"+tds.get(4).text().replace("'", "")+"','"+filename+"','"+uploaddate+"','"+txtname+"','"+nwupdate+"','"+newack+"','"+htmldate+"','"+val[0]+"')");
-					        System.out.println("Mannu 1st Query insert ");
+		        	if(tds.get(2).text().length()>300)
+			        {
+			        	if (tds.get(4).text().equals("File header details already present in table - duplicate entry of file")) {
+			        		System.out.println("1htmlupload '"+tds.get(0).text()+"','"+tds.get(1).text()+"','"+tds.get(1).text()+"','"+tds.get(3).text()+"','"+tds.get(4).text().replace("'", "")+"','"+filename+"','"+uploaddate+"','"+txtname+"','"+htmldate+"','0','"+htmldate+"','"+val[0]+"'");
+			        		 ps=con.prepareStatement("htmlupload '"+tds.get(0).text()+"','"+tds.get(1).text()+"','"+tds.get(1).text()+"','"+tds.get(3).text()+"','"+tds.get(4).text().replace("'", "")+"','"+filename+"','"+uploaddate+"','"+txtname+"','"+htmldate+"','0','"+htmldate+"','"+val[0]+"'");
+			        		 ps.execute();
+			        		 ps.close();
+			        		 System.out.println("New Error");
+						} else {
+								System.out.println("2htmlupload '"+tds.get(0).text()+"','"+tds.get(1).text()+"','"+tds.get(1).text()+"','"+tds.get(3).text()+"','"+tds.get(4).text().replace("'", "")+"','"+filename+"','"+uploaddate+"','"+txtname+"','"+nwupdate+"','"+newack+"','"+htmldate+"','"+val[0]+"'");
+							 	ps=con.prepareStatement("htmlupload '"+tds.get(0).text()+"','"+tds.get(1).text()+"','"+tds.get(1).text()+"','"+tds.get(3).text()+"','"+tds.get(4).text().replace("'", "")+"','"+filename+"','"+uploaddate+"','"+txtname+"','"+nwupdate+"','"+newack+"','"+htmldate+"','"+val[0]+"'");
+						        System.out.println("Mannu 1st Query insert ");
+						        ps.execute();
+						        ps.close();
+						}
+			        } else{
+			        	if (tds.get(4).text().equals("File header details already present in table - duplicate entry of file")) {
+							System.out.println("3htmlupload '"+tds.get(0).text()+"','"+tds.get(1).text()+"','"+tds.get(2).text().replace("'", "")+"','"+tds.get(3).text()+"','"+tds.get(4).text().replace("'", "")+"','"+filename+"','"+uploaddate+"','"+txtname+"','"+htmldate+"','0','"+htmldate+"','"+val[0]+"'");
+			        		ps=con.prepareStatement("htmlupload '"+tds.get(0).text()+"','"+tds.get(1).text()+"','"+tds.get(2).text().replace("'", "")+"','"+tds.get(3).text()+"','"+tds.get(4).text().replace("'", "")+"','"+filename+"','"+uploaddate+"','"+txtname+"','"+htmldate+"','0','"+htmldate+"','"+val[0]+"'");
+					        System.out.println("New Error"); 
 					        ps.execute();
 					        ps.close();
-					}
-		        } else{
-		        	if (tds.get(4).text().equals("File header details already present in table - duplicate entry of file")) {
-						ps=con.prepareStatement("insert into panfilevalidation values('"+tds.get(0).text()+"','"+tds.get(1).text()+"','"+tds.get(2).text().replace("'", "")+"','"+tds.get(3).text()+"','"+tds.get(4).text().replace("'", "")+"','"+filename+"','"+uploaddate+"','"+txtname+"','"+htmldate+"','0','"+htmldate+"','"+val[0]+"')");
-				        System.out.println("New Error"); 
-				        ps.execute();
-				        ps.close();
-		        		
-					} else {
-						ps=con.prepareStatement("insert into panfilevalidation values('"+tds.get(0).text()+"','"+tds.get(1).text()+"','"+tds.get(2).text().replace("'", "")+"','"+tds.get(3).text()+"','"+tds.get(4).text().replace("'", "")+"','"+filename+"','"+uploaddate+"','"+txtname+"','"+nwupdate+"','"+newack+"','"+htmldate+"','"+val[0]+"')");
-				        System.out.println("Mannu 2nd Query insert "); 
-				        ps.execute();
-				        ps.close();
-				        
-					}
-		        }
+			        		
+						} else {
+							System.out.println("4htmlupload '"+tds.get(0).text()+"','"+tds.get(1).text()+"','"+tds.get(2).text().replace("'", "")+"','"+tds.get(3).text()+"','"+tds.get(4).text().replace("'", "")+"','"+filename+"','"+uploaddate+"','"+txtname+"','"+nwupdate+"','"+newack+"','"+htmldate+"','"+val[0]+"'");
+							ps=con.prepareStatement("htmlupload '"+tds.get(0).text()+"','"+tds.get(1).text()+"','"+tds.get(2).text().replace("'", "")+"','"+tds.get(3).text()+"','"+tds.get(4).text().replace("'", "")+"','"+filename+"','"+uploaddate+"','"+txtname+"','"+nwupdate+"','"+newack+"','"+htmldate+"','"+val[0]+"'");
+					        System.out.println("Mannu 2nd Query insert 11"); 
+					        ps.execute();
+					        ps.close();
+					        
+						}
+			        }
+			        
+		        	
+				} catch (Exception e) {
+					System.out.println("Error2: "+e);
+				}
 		        
 		        }
-		        
 		        
 		        File uploaddone=new File(htmlFolder+"//UploadDone");
 		        if (!uploaddone.exists()) {
@@ -155,12 +151,9 @@ public class HTMLupload extends Thread{
 		        JOptionPane.showMessageDialog(null, "Completed", "PanOutfileUpload", JOptionPane.INFORMATION_MESSAGE);
 		        con.close();
 		        
-		       
-				
 			} else {
 				System.out.println("Path Not Selected");
 			}
-	        
 	        
 	    }catch(Exception e)
 	    {
